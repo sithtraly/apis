@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Query } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Body, Controller, Get, Post, Put, Query } from "@nestjs/common";
+import { AppService } from "./app.service";
 
 @Controller()
 export class AppController {
@@ -7,11 +7,25 @@ export class AppController {
 
   @Get()
   getHello(@Query() query: any): string {
-    return this.appService.getHello() + ' ' + query.id;
+    return this.appService.getHello();
   }
 
   @Post()
-  postHello() {
-    return 'This is post method';
+  createUser(@Body() body: any) {
+    if (body.username !== undefined && body.password !== undefined) {
+      this.appService.createUser(body.username, body.password);
+      return "Create user success";
+    } else {
+      return "Create user fail";
+    }
+  }
+
+  @Put()
+  updateUser(@Body() body: { id: number; username: string; password: string }) {
+    if (body.id && body.username && body.password) {
+      this.appService.updateUser(body);
+      return "Update user success";
+    }
+    return "Update user fail";
   }
 }
