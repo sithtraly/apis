@@ -23,4 +23,9 @@ export class AppService {
     user.password = obj.password;
     this.data[idx] = user;
   }
+
+  deleteUser(id: number) {
+    const idx = this.data.findIndex((d: any) => d.id === id);
+    this.data.splice(idx, 1)
+  }
 }

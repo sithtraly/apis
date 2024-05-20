@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Post, Put, Query } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post, Put, Query } from "@nestjs/common";
 import { AppService } from "./app.service";
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get()
   getHello(@Query() query: any): string {
@@ -25,7 +25,14 @@ export class AppController {
     if (body.id && body.username && body.password) {
       this.appService.updateUser(body);
       return "Update user success";
+    } else {
+      return "Update user fail";
     }
-    return "Update user fail";
+  }
+
+  @Delete()
+  deleteUser(@Query() query: any) {
+    this.appService.deleteUser(query.id)
+    return 'User deleted'
   }
 }
