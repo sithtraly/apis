@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Post, Put, Query } from "@nestjs/common";
 import { AppService } from "./app.service";
 import { ApiTags } from "@nestjs/swagger";
-import { UserDTO, UserUpdaetDTO } from "./dto/user.dto";
+import { UserDTO, UserDeleteDTO, UserUpdaetDTO } from "./dto/user.dto";
 
 @ApiTags('User')
 @Controller()
@@ -34,7 +34,7 @@ export class AppController {
   }
 
   @Delete()
-  deleteUser(@Query() query: any) {
+  deleteUser(@Query() query: UserDeleteDTO) {
     this.appService.deleteUser(query.id)
     return 'User deleted'
   }

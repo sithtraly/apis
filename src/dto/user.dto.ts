@@ -8,7 +8,12 @@ export class UserDTO {
   password: string
 }
 
-export class UserUpdaetDTO extends UserDTO{
+export class UserUpdaetDTO extends UserDTO {
+  @ApiProperty()
+  id: number
+}
+
+export class UserDeleteDTO {
   @ApiProperty()
   id: number
 }
